@@ -1,0 +1,111 @@
+{
+	"name": "df_hechos_airbnb_v1",
+	"properties": {
+		"folder": {
+			"name": "DW"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_tbl_airbnb",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_hechos_airbnb",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          city as string,",
+				"          price as double,",
+				"          day as string,",
+				"          room_type as string,",
+				"          shared_room as boolean,",
+				"          private_room as boolean,",
+				"          person_capacity as integer,",
+				"          superhost as boolean,",
+				"          multiple_rooms as integer,",
+				"          business as integer,",
+				"          cleanliness_rating as integer,",
+				"          guest_satisfaction as integer,",
+				"          bedrooms as integer,",
+				"          city_center as double,",
+				"          metro_distance as double,",
+				"          attraction_index as double,",
+				"          normalised_attraction_index as double,",
+				"          restraunt_index as double,",
+				"          normalised_restraunt_index as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: 'SELECT city, price, day, room_type, shared_room, private_room, person_capacity, superhost, multiple_rooms, business, cleanliness_rating, guest_satisfaction, bedrooms, city_center, metro_distance, attraction_index, normalised_attraction_index, restraunt_index, normalised_restraunt_index FROM [dbo].[tbl_hechos_airbnb]',",
+				"     format: 'query') ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_hechos_airbnb as integer,",
+				"          city as string,",
+				"          price as double,",
+				"          day as string,",
+				"          room_type as string,",
+				"          shared_room as boolean,",
+				"          private_room as boolean,",
+				"          person_capacity as integer,",
+				"          superhost as boolean,",
+				"          multiple_rooms as integer,",
+				"          business as integer,",
+				"          cleanliness_rating as integer,",
+				"          guest_satisfaction as integer,",
+				"          bedrooms as integer,",
+				"          city_center as double,",
+				"          metro_distance as double,",
+				"          attraction_index as double,",
+				"          normalised_attraction_index as double,",
+				"          restraunt_index as double,",
+				"          normalised_restraunt_index as double",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          city,",
+				"          price,",
+				"          day,",
+				"          room_type,",
+				"          shared_room,",
+				"          private_room,",
+				"          person_capacity,",
+				"          superhost,",
+				"          multiple_rooms,",
+				"          business,",
+				"          cleanliness_rating,",
+				"          guest_satisfaction,",
+				"          bedrooms,",
+				"          city_center,",
+				"          metro_distance,",
+				"          attraction_index,",
+				"          normalised_attraction_index,",
+				"          restraunt_index,",
+				"          normalised_restraunt_index",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}

@@ -1,0 +1,61 @@
+{
+	"name": "ds_dim_room",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_dw_airbnb",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "DW"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "room_type",
+				"type": "varchar"
+			},
+			{
+				"name": "shared_room",
+				"type": "bit"
+			},
+			{
+				"name": "private_room",
+				"type": "bit"
+			},
+			{
+				"name": "person_capacity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "superhost",
+				"type": "bit"
+			},
+			{
+				"name": "multiple_rooms",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "business",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cleanliness_rating",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "bedrooms",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIM_DETAILS_ROOM"
+		}
+	}
+}
